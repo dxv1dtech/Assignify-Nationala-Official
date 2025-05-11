@@ -146,16 +146,8 @@ function loadRecentHomework() {
           });
       } else {
         // User is not logged in, show login message
-        recentHwContainer.innerHTML = "<p>Conectează-te pentru a vedea temele recente.</p>";
-        
-        // Add login button
-        const loginBtn = document.createElement("a");
-        loginBtn.href = "hwmanagement.html";
-        loginBtn.className = "primary-btn";
-        loginBtn.style.display = "inline-block";
-        loginBtn.style.marginTop = "1rem";
-        loginBtn.textContent = "Conectare";
-        recentHwContainer.appendChild(loginBtn);
+        recentHwContainer.innerHTML = "<p>Conectează-te pentru a vedea temele recente. (Intră pe pagina - Manager de teme - pentru a te loga)</p>";
+        recentHwContainer.style.marginTop = "10px";
       }
     }, (error) => {
       console.error("Auth state error:", error);
