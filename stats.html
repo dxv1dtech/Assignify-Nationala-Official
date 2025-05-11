@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Assignify - Statistici</title>
+  <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="logo">
+        <h2 class="logo-text">Assignify</h2>
+      </a>
+      
+      <a href="information.html" class="info-btn" title="Informații">ⓘ</a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-btn">Pagina principală</a>
+        <a href="hwmanagement.html" class="nav-btn">Manager de teme</a>
+        <a href="information.html" class="info-btn" title="Informații">ⓘ</a>
+      </nav>
+    </div>
+  </header>
+
+
+  <main class="main-content">
+    
+  </main>
+
+<script>
+    function createStatsCard(title, count, color) {
+        const card = document.createElement("div");
+        card.classList.add("stats-card");
+        card.style.borderLeftColor = color;
+
+        const titleElement = document.createElement("h3");
+        titleElement.textContent = title;
+
+        const countElement = document.createElement("div");
+        countElement.classList.add("stats-count");
+        countElement.textContent = count;
+
+        card.appendChild(titleElement);
+        card.appendChild(countElement);
+
+        return card;
+    }
+
+    function loadStats() {
+
+    const types = JSON.parse(localStorage.getItem("types")) || [];
+    const messages = JSON.parse(localStorage.getItem("messages")) || [];
+    const classes = JSON.parse(localStorage.getItem("classes")) || [];
+    
+    const countTema = types.filter(item => item === "Temă").length;
+    const countProiect = types.filter(item => item === "Proiect").length;
+    const countPrezentare = types.filter(item => item === "Prezentare").length;
+    const countAltele = types.filter(item => item === "Altele").length;
+    const totalCount = types.length;
+    
+    const statsContainer = document.querySelector(".main-content");
+    
+    const headerSection = document.createElement("section");
+    headerSection.classList.add("stats-header");
+    
+    const header = document.createElement("h2");
+    header.textContent = "Statistici teme";
+    headerSection.appendChild(header);
+    
+    const description = document.createElement("p");
+    description.textContent = `Ai ${totalCount} teme în total. Iată distribuția lor:`;
+    headerSection.appendChild(description);
+    
+    statsContainer.appendChild(headerSection);
+    
+    const cardsSection = document.createElement("section");
+    cardsSection.classList.add("stats-cards");
+    
+    cardsSection.appendChild(createStatsCard("Teme", countTema, "#3498db"));
+    cardsSection.appendChild(createStatsCard("Proiecte", countProiect, "#e74c3c"));
+    cardsSection.appendChild(createStatsCard("Prezentări", countPrezentare, "#2ecc71"));
+    cardsSection.appendChild(createStatsCard("Altele", countAltele, "#9b59b6"));
+    
+    statsContainer.appendChild(cardsSection);
+    
+    if (totalCount > 0) {
+        const classCountMap = {};
+        classes.forEach(className => {
+        if (classCountMap[className]) {
+            classCountMap[className]++;
+        } else {
+            classCountMap[className] = 1;
+        }
+        });
+        
+        const classDistributionSection = document.createElement("section");
+        classDistributionSection.classList.add("stats-section");
+        
+        const classHeader = document.createElement("h2");
+        classHeader.textContent = "Distribuție pe materii";
+        classDistributionSection.appendChild(classHeader);
+        
+        const classListSection = document.createElement("div");
+        classListSection.classList.add("class-distribution");
+        
+        Object.entries(classCountMap).forEach(([className, count]) => {
+            const classItem = document.createElement("div");
+            classItem.classList.add("class-item");
+            
+            const classNameElement = document.createElement("span");
+            classNameElement.classList.add("class-name");
+            classNameElement.textContent = className + " - ";
+            
+            const classCountElement = document.createElement("span");
+            classCountElement.classList.add("class-count");
+            classCountElement.textContent = count;
+            
+            classItem.appendChild(classNameElement);
+            classItem.appendChild(classCountElement);
+            classListSection.appendChild(classItem);
+        });
+        
+        classDistributionSection.appendChild(classListSection);
+        statsContainer.appendChild(classDistributionSection);
+    }
+
+    if (totalCount === 0) {
+        const noStats = document.createElement("div");
+        noStats.classList.add("no-stats");
+        noStats.textContent = "Nu există teme salvate pentru a afișa statistici.";
+        statsContainer.appendChild(noStats);
+    }
+    }
+    
+    // Load stats when the page loads
+    window.addEventListener("DOMContentLoaded", loadStats);
+</script>
+
+</body>
+
+</html>

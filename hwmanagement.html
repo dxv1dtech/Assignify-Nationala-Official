@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Assignify - Manager de teme</title>
+  <link rel="stylesheet" href="css/index.css"/>
+  <link rel="stylesheet" href="css/firebase-auth.css"/>
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="logo">
+        <h2 class="logo-text">Assignify</h2>
+      </a>
+
+      <a href="information.html" class="info-btn" title="Informații">ⓘ</a>
+
+      <nav class="nav-links" id="nav-links">
+        <a href="index.html" class="nav-btn">Pagina principală</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <!-- Authentication container - visible when not logged in -->
+    <div id="auth-container" class="auth-container">
+      <div class="auth-section">
+        <h2 class="auth-title">Conectare</h2>
+        <form id="login-form" class="auth-form">
+          <div class="form-group">
+            <label for="login-email">Email:</label>
+            <input type="email" id="login-email" required>
+          </div>
+          <div class="form-group">
+            <label for="login-password">Parolă:</label>
+            <input type="password" id="login-password" required>
+          </div>
+          <button type="submit" class="auth-btn">Conectare</button>
+          <div class="auth-switch">
+            Nu ai cont? <a href="#" id="show-signup">Înregistrează-te</a>
+          </div>
+        </form>
+      </div>
+
+      <div class="auth-section" style="display: none;">
+        <h2 class="auth-title">Înregistrare</h2>
+        <form id="signup-form" class="auth-form">
+          <div class="form-group">
+            <label for="signup-email">Email:</label>
+            <input type="email" id="signup-email" required>
+          </div>
+          <div class="form-group">
+            <label for="signup-password">Parolă:</label>
+            <input type="password" id="signup-password" required>
+          </div>
+          <div class="form-group">
+            <label for="signup-confirm-password">Confirmă parola:</label>
+            <input type="password" id="signup-confirm-password" required>
+          </div>
+          <button type="submit" class="auth-btn">Înregistrare</button>
+          <div class="auth-switch">
+            Ai deja cont? <a href="#" id="show-login">Conectează-te</a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- App content - visible after login -->
+    <div id="app-content" class="app-content" style="display: none;">
+      <div class="user-welcome">
+        <h2>Bine ai venit, <span id="user-email"></span>!</h2>
+        <button id="logout-btn" class="danger-btn">Deconectare</button>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">Adaugă temă</button>
+        <div class="dropdown-content">
+          <div class="dropdown-header">
+            <h3>Adaugă o temă nouă</h3>
+          </div>
+          <div class="dropdown-form">
+            <div class="form-group">
+              <label for="hw_type">Tip:</label>
+              <select id="hw_type" class="form-select">
+                <option value="default" selected>-- Selectează tipul --</option>
+                <option value="Proiect">Proiect</option>
+                <option value="Temă">Temă</option>
+                <option value="Prezentare">Prezentare</option>
+                <option value="Altele">Altele</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="hw_class">Materie:</label>
+              <select id="hw_class" class="form-select">
+                <option value="default" selected>-- Selectează materia --</option>
+                <option value="Matematică">Matematică</option>
+                <option value="Română">Română</option>
+                <option value="Engleză">Engleză</option>
+                <option value="Biologie">Biologie</option>
+                <option value="Fizică">Fizică</option>
+                <option value="Chimie">Chimie</option>
+                <option value="Istorie">Istorie</option>
+                <option value="Geografie">Geografie</option>
+                <option value="Informatică">Informatică</option>
+                <option value="Altele">Altele</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="hw_input">Descriere:</label>
+              <input type="text" id="hw_input" placeholder="Introdu descrierea..." />
+            </div>
+            <div class="form-group">
+              <label for="hw_duedate">Termen limită:</label>
+              <div class="date-field">
+                <input type="date" id="hw_duedate" />
+              </div>
+            </div>
+            <div class="button-group">
+              <button id="hw_adder" class="primary-btn">Adaugă</button>
+              <button id="delete_all" class="danger-btn">Șterge toate</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section id="hw_container">
+        <!-- Homework items will be loaded here -->
+      </section>
+    </div>
+  </main>
+
+  <!-- Firebase SDK -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.22.2/firebase-app-compat.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.22.2/firebase-auth-compat.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.22.2/firebase-firestore-compat.min.js"></script>
+  
+  <script src="js/dropdown.js"></script>
+  <script src="js/firebase-homework.js"></script>
+</body>
+
+</html>
