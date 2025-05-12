@@ -1,20 +1,4 @@
-// Firebase Configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyA5Wy9vcg9ft0f-ABA9-_gELDuzHCjsCyU",
-  authDomain: "assignify-c8ca0.firebaseapp.com",
-  projectId: "assignify-c8ca0",
-  storageBucket: "assignify-c8ca0.firebasestorage.app",
-  messagingSenderId: "579040733871",
-  appId: "1:579040733871:web:da36004805c3473296c25a",
-  measurementId: "G-LJXWRSQ747"
-};
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const db = firebase.firestore();
-
-// DOM Elements
 const hw_input = document.getElementById("hw_input");
 const hw_type_select = document.getElementById("hw_type");
 const hw_class_select = document.getElementById("hw_class");
@@ -24,7 +8,7 @@ const hw_container = document.getElementById("hw_container");
 const delete_all = document.getElementById("delete_all");
 const navLinks = document.getElementById("nav-links");
 
-// Authentication DOM Elements
+
 const authContainer = document.getElementById("auth-container");
 const appContent = document.getElementById("app-content");
 const loginForm = document.getElementById("login-form");
@@ -34,25 +18,20 @@ const showLogin = document.getElementById("show-login");
 const logoutBtn = document.getElementById("logout-btn");
 const userEmailSpan = document.getElementById("user-email");
 
-// Auth State Listener
 auth.onAuthStateChanged(user => {
   if (user) {
-    // User is signed in
     showLoggedInUI(user);
     loadHomework();
   } else {
-    // User is signed out
     showLoggedOutUI();
   }
 });
 
-// Show/Hide Authentication Elements
 function showLoggedInUI(user) {
   authContainer.style.display = "none";
   appContent.style.display = "block";
   userEmailSpan.textContent = user.email;
   
-  // Update navigation
   if (!document.getElementById("logout-nav-btn")) {
     const addHomeworkDropdown = document.querySelector(".dropdown");
     if (addHomeworkDropdown && addHomeworkDropdown.parentNode !== navLinks) {
@@ -65,14 +44,12 @@ function showLoggedOutUI() {
   authContainer.style.display = "flex";
   appContent.style.display = "none";
   
-  // Display first auth section (login)
   const authSections = document.querySelectorAll(".auth-section");
   authSections.forEach((section, index) => {
     section.style.display = index === 0 ? "block" : "none";
   });
 }
 
-// Toggle between Login/Signup forms
 showSignup.addEventListener("click", (e) => {
   e.preventDefault();
   const authSections = document.querySelectorAll(".auth-section");
@@ -87,7 +64,6 @@ showLogin.addEventListener("click", (e) => {
   authSections[1].style.display = "none";
 });
 
-// Login Form Submit
 loginForm.addEventListener("submit", (e) => {
   e.preventDefault();
   
@@ -103,7 +79,6 @@ loginForm.addEventListener("submit", (e) => {
     });
 });
 
-// Signup Form Submit
 signupForm.addEventListener("submit", (e) => {
   e.preventDefault();
   
@@ -125,12 +100,11 @@ signupForm.addEventListener("submit", (e) => {
     });
 });
 
-// Logout
 logoutBtn.addEventListener("click", () => {
   auth.signOut();
 });
 
-// Format Date Function
+
 function formatDate(dateString) {
   if (!dateString) return "N/A";
 
@@ -144,7 +118,6 @@ function formatDate(dateString) {
   return dateString;
 }
 
-// Set Default Date
 function setDefaultDate() {
   const today = new Date();
   const year = today.getFullYear();
@@ -156,12 +129,10 @@ function setDefaultDate() {
   }
 }
 
-// Create Homework Card
 function createHomeworkCard(id, message, date, duedate, type, className) {
   const card = document.createElement("div");
   card.classList.add("hw-card");
 
-  // Set card border color based on homework type
   switch (type) {
     case "Proiect":
       card.style.borderLeftColor = "#e74c3c"; 
@@ -216,7 +187,6 @@ function createHomeworkCard(id, message, date, duedate, type, className) {
   return card;
 }
 
-// Add Homework
 hw_adder.addEventListener("click", () => {
   const userInput = hw_input.value.trim();
   const hw_type = hw_type_select.value;
@@ -245,7 +215,6 @@ hw_adder.addEventListener("click", () => {
     return;
   }
 
-  // Add to Firebase
   db.collection("homework").add({
     userId: user.uid,
     message: userInput,
@@ -262,13 +231,11 @@ hw_adder.addEventListener("click", () => {
     hw_duedate_input.value = "";
     setDefaultDate();
     
-    // Close dropdown after adding
     const dropdown = document.querySelector('.dropdown-content');
     if (dropdown && dropdown.classList.contains('show')) {
       dropdown.classList.remove('show');
     }
 
-    // Reload homework
     loadHomework();
   })
   .catch((error) => {
@@ -276,7 +243,6 @@ hw_adder.addEventListener("click", () => {
   });
 });
 
-// Load Homework
 function loadHomework() {
   const user = auth.currentUser;
   if (!user) {
@@ -337,7 +303,6 @@ function removeHomework(id) {
   }
 }
 
-// Delete All Homework
 delete_all.addEventListener("click", () => {
   const user = auth.currentUser;
   if (!user) return;
@@ -362,7 +327,6 @@ delete_all.addEventListener("click", () => {
   }
 });
 
-// Initialize on load
 window.addEventListener("DOMContentLoaded", () => {
   setDefaultDate();
 });

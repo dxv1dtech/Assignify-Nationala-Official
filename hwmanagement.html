@@ -24,7 +24,6 @@
   </header>
 
   <main class="main-content">
-    <!-- Authentication container - visible when not logged in -->
     <div id="auth-container" class="auth-container">
       <div class="auth-section">
         <h2 class="auth-title">Conectare</h2>
@@ -67,7 +66,6 @@
       </div>
     </div>
 
-    <!-- App content - visible after login -->
     <div id="app-content" class="app-content" style="display: none;">
       <div class="user-welcome">
         <h2>Bine ai venit, <span id="user-email"></span>!</h2>
@@ -126,18 +124,18 @@
       </div>
 
       <section id="hw_container">
-        <!-- Homework items will be loaded here -->
       </section>
     </div>
   </main>
 
-  <!-- Firebase SDK -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.22.2/firebase-app-compat.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.22.2/firebase-auth-compat.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.22.2/firebase-firestore-compat.min.js"></script>
-  
+
+  <script src="js/firebase-init.js"></script>
   <script src="js/dropdown.js"></script>
   <script src="js/firebase-homework.js"></script>
+  <script src="js/switch-mode.js"></script>
 </body>
 
 </html>

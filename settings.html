@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html lang="ro">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Assignify</title>
-  <link rel="stylesheet" href="css/index.css">
+  <title>Setări - Assignify</title>
+  <link rel="stylesheet" href="css/index.css" />
 </head>
-
-<script src="js/switch-mode.js"></script>
-
 
 <body>
   <header class="navbar">
@@ -17,32 +13,16 @@
       <a href="index.html" class="logo">
         <h2 class="logo-text">Assignify</h2>
       </a>
-      
-      <a href="information.html" class="info-btn" title="Informații">ⓘ</a>
-
       <nav class="nav-links">
+        <a href="index.html" class="nav-btn">Pagina principală</a>
         <a href="hwmanagement.html" class="nav-btn">Manager de teme</a>
-        <a href="settings.html" class="settings-btn">Setări</a>
-        <a href="information.html" class="info-btn" title="Informații">ⓘ</a>
       </nav>
     </div>
   </header>
 
-
   <main class="main-content">
-    <section class="hero">
-      <h1>Bine ai venit pe Assignify</h1>
-      <p>Organizează-ți temele simplu și eficient.</p>
-    </section>
-
-    <section id="citat" class="quote-section">
-
-    </section>
-
-    <section>
-      <h2>Teme cu termen apropiat</h2>
-      <div id="mostrecenthw"></div>
-    </section>
+    <h1>Setări</h1>
+    <button id="toggle-theme" class="primary-btn">Schimbă tema</button>
   </main>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.22.2/firebase-app-compat.min.js"></script>
@@ -50,9 +30,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.22.2/firebase-firestore-compat.min.js"></script>
 
   <script src="js/firebase-init.js"></script>
-  <script src="js/firebase-gethw.js"></script>
-  <script src="js/citat.js"></script>
   <script src="js/switch-mode.js"></script>
 </body>
 
 </html>
+     

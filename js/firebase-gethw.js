@@ -1,14 +1,3 @@
-// Firebase Configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyA5Wy9vcg9ft0f-ABA9-_gELDuzHCjsCyU",
-  authDomain: "assignify-c8ca0.firebaseapp.com",
-  projectId: "assignify-c8ca0",
-  storageBucket: "assignify-c8ca0.firebasestorage.app",
-  messagingSenderId: "579040733871",
-  appId: "1:579040733871:web:da36004805c3473296c25a",
-  measurementId: "G-LJXWRSQ747"
-};
-
 // DOM Element
 const recentHwContainer = document.getElementById("mostrecenthw");
 
@@ -24,12 +13,10 @@ function formatDate(dateString) {
   return dateString;
 }
 
-// Create Homework Card
 function createHomeworkCard(message, duedate, type, className) {
   const div = document.createElement("div");
   div.classList.add("hw-card");
   
-  // Set card border color based on homework type
   switch(type) {
     case "Proiect": div.style.borderLeftColor = "#e74c3c"; break;
     case "Temă": div.style.borderLeftColor = "#3498db"; break;
@@ -65,7 +52,6 @@ function createHomeworkCard(message, duedate, type, className) {
   return div;
 }
 
-// Parse Date for sorting
 function parseDate(dateStr) {
   if (!dateStr) return Infinity;
   
@@ -73,7 +59,6 @@ function parseDate(dateStr) {
   return isNaN(timestamp) ? Infinity : timestamp;
 }
 
-// Display homework
 function displayHomework(homeworkList) {
   recentHwContainer.innerHTML = "";
   
@@ -98,7 +83,6 @@ function displayHomework(homeworkList) {
   });
 }
 
-// Load Recent Homework from Firebase
 function loadRecentHomework() {
   if (!recentHwContainer) {
     console.error("Recent homework container not found");
@@ -107,13 +91,11 @@ function loadRecentHomework() {
   
   recentHwContainer.innerHTML = "<p>Se încarcă temele recente...</p>";
   
-  // Try to get current user (if logged in)
   try {
     const auth = firebase.auth();
     
     auth.onAuthStateChanged(user => {
       if (user) {
-        // User is logged in, fetch homework from Firebase
         const db = firebase.firestore();
         
         db.collection("homework")
@@ -125,7 +107,6 @@ function loadRecentHomework() {
               return;
             }
             
-            // Extract homework data
             const homeworkList = [];
             querySnapshot.forEach(doc => {
               const data = doc.data();
@@ -145,7 +126,6 @@ function loadRecentHomework() {
             recentHwContainer.textContent = "Eroare la încărcarea temelor.";
           });
       } else {
-        // User is not logged in, show login message
         recentHwContainer.innerHTML = "<p>Conectează-te pentru a vedea temele recente. (Intră pe pagina - Manager de teme - pentru a te loga)</p>";
         recentHwContainer.style.marginTop = "10px";
       }

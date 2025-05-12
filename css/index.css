@@ -743,3 +743,174 @@ input[type="date"] {
     flex: 1;
   }
 }
+
+body.light-mode {
+  background-color: #f4f6f8;
+  color: #2c3e50;
+}
+body.dark-mode {
+  background-color: #1c1c1c;
+  color: #f0f0f0;
+}
+body.dark-mode .main-content {
+  background-color: #2a2a2a;
+}
+body.dark-mode .navbar {
+  background-color: #121212;
+}
+body.dark-mode .nav-links a,
+body.dark-mode .info-btn {
+  background-color: #444;
+}
+body.dark-mode .nav-links a:hover,
+body.dark-mode .info-btn:hover {
+  background-color: #666;
+}
+
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+  background-color: #333;
+  color: #f0f0f0;
+  border-color: #555;
+}
+
+body.dark-mode input::placeholder {
+  color: #aaa;
+}
+
+body.dark-mode .form-select {
+  background-color: #333;
+  color: #f0f0f0;
+  border: 1px solid #555;
+}
+
+body.dark-mode .dropdown-content,
+body.dark-mode .dropdown-form,
+body.dark-mode .calendar-content,
+body.dark-mode .info-instructions,
+body.dark-mode .about-content,
+body.dark-mode .hw-card {
+  background-color: #2a2a2a;
+  color: #f0f0f0;
+  border-left-color: #3498db;
+}
+
+body.dark-mode .dropdown-header {
+  background: linear-gradient(135deg, #1e88e5, #1565c0);
+}
+
+body.dark-mode .primary-btn {
+  background: linear-gradient(to right, #1e88e5, #1565c0);
+}
+
+body.dark-mode .primary-btn:hover {
+  background: linear-gradient(to right, #1565c0, #0d47a1);
+}
+
+body.dark-mode .danger-btn {
+  background: linear-gradient(to right, #e53935, #b71c1c);
+}
+
+body.dark-mode .danger-btn:hover {
+  background: linear-gradient(to right, #b71c1c, #7f0000);
+}
+
+body.dark-mode .calendar-day:hover {
+  background-color: #37474f;
+}
+
+body.dark-mode .calendar-day.today {
+  border-color: #90caf9;
+}
+
+body.dark-mode .calendar-day.selected {
+  background-color: #1565c0;
+  color: white;
+}
+
+body.dark-mode .quote-section,
+body.dark-mode .section-divider {
+  border-color: #444;
+}
+
+body.dark-mode ::-webkit-scrollbar {
+  width: 8px;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 4px;
+}
+
+body.dark-mode {
+  color: #f0f0f0;
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6,
+body.dark-mode p,
+body.dark-mode label,
+body.dark-mode li,
+body.dark-mode span,
+body.dark-mode a {
+  color: #f0f0f0;
+}
+
+body.dark-mode .form-group label,
+body.dark-mode .dropdown-form label,
+body.dark-mode .dropdown-header,
+body.dark-mode .info-instructions,
+body.dark-mode .about-content {
+  color: #ffffff;
+}
+
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+  background-color: #333;
+  color: #f9f9f9;
+  border-color: #555;
+}
+
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+  color: #bbb;
+}
+
+body.dark-mode .primary-btn,
+body.dark-mode .danger-btn,
+body.dark-mode .dropbtn,
+body.dark-mode .calendar-btn {
+  color: white;
+}
+
+body.dark-mode .nav-links a,
+body.dark-mode .info-btn {
+  color: white;
+}
+
+body.dark-mode .dropdown-content,
+body.dark-mode .dropdown-form,
+body.dark-mode .calendar-content,
+body.dark-mode .hw-card {
+  color: #f0f0f0;
+}
+
+body.dark-mode .quote-section,
+body.dark-mode .section-divider {
+  border-color: #444;
+}
+body.dark-mode .hw-type {
+  background-color: #0ea5e9;
+  color: #ffffff;
+}
+
+body.dark-mode .hw-class {
+  background-color: #22c55e;
+  color: #ffffff;
+}
