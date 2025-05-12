@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const userRef = db.collection("users").doc(user.uid);
 
       userRef.get().then(doc => {
-        const theme = doc.exists && doc.data().theme ? doc.data().theme : "light";
+        const theme = doc.exists && doc.data().theme ? doc.data().theme : "dark";
         applyTheme(theme);
       });
 
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
     } else {
-      const theme = localStorage.getItem("theme") || "light";
+      const theme = localStorage.getItem("theme") || "dark";
       applyTheme(theme);
       if (toggleBtn) {
         toggleBtn.addEventListener("click", () => {

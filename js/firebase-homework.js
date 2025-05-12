@@ -173,6 +173,30 @@ function createHomeworkCard(id, message, date, duedate, type, className) {
   const dueDate = document.createElement("p");
   dueDate.textContent = `Până pe: ${formatDate(duedate)}`;
 
+  const daysRemaining = document.createElement("p");
+
+  const today = new Date();
+  const due = new Date(duedate);
+  due.setHours(0, 0, 0, 0);
+  today.setHours(0, 0, 0, 0);
+
+  const diffTime = due - today;
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+  if (isNaN(diffDays)) {
+    daysRemaining.textContent = "Dată invalidă";
+  } else if (diffDays > 0) {
+    daysRemaining.textContent = `Mai sunt ${diffDays} zile până la deadline.`;
+  } else if (diffDays === 0) {
+    daysRemaining.textContent = "Astăzi e termenul!";
+  } else {
+    daysRemaining.textContent = `Timpul a expirat cu ${Math.abs(diffDays)} zile în urmă`;
+  }
+
+  if (diffDays < 3) {
+    card.style.backgroundColor = "#FF4545";
+  }
+
   const removeBtn = document.createElement("button");
   removeBtn.textContent = "Șterge";
   removeBtn.className = "remove-btn";
@@ -182,6 +206,7 @@ function createHomeworkCard(id, message, date, duedate, type, className) {
   card.appendChild(header);
   card.appendChild(createdDate);
   card.appendChild(dueDate);
+  card.appendChild(daysRemaining);
   card.appendChild(removeBtn);
 
   return card;

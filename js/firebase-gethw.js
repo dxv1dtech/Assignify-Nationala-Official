@@ -55,8 +55,13 @@ function createHomeworkCard(message, duedate, type, className) {
 function parseDate(dateStr) {
   if (!dateStr) return Infinity;
   
-  const timestamp = new Date(dateStr).getTime();
-  return isNaN(timestamp) ? Infinity : timestamp;
+  const parts = dateStr.split("-");
+  if (parts.length === 3) {
+    const dateFormatted = `${parts[0]}-${parts[1]}-${parts[2]}`;
+    const timestamp = new Date(dateFormatted).getTime();
+    return isNaN(timestamp) ? Infinity : timestamp;
+  }
+  return Infinity;
 }
 
 function displayHomework(homeworkList) {
@@ -115,7 +120,7 @@ function loadRecentHomework() {
                 due: data.duedate,
                 parsedDue: parseDate(data.duedate),
                 type: data.type || "Temă",
-                className: data.class || "General"
+                className: data.class || "General",
               });
             });
             
