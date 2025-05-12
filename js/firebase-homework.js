@@ -1,4 +1,3 @@
-
 const hw_input = document.getElementById("hw_input");
 const hw_type_select = document.getElementById("hw_type");
 const hw_class_select = document.getElementById("hw_class");
