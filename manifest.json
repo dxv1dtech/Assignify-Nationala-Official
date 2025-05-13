@@ -1,0 +1,22 @@
+{
+    "name": "Assignify",
+    "short_name": "Assignify",
+    "description": "A simple web app to track homework.",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#ffffff", 
+    "theme_color": "#3498db", 
+    "icons": [
+      {
+        "src": "images/assignify.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "images/assignify.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  }
+  
