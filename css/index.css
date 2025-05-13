@@ -1125,3 +1125,53 @@ body.dark-mode .auth-switch a:hover {
 .auth-section {
   animation: fadeIn 0.4s ease forwards;
 }
+
+.contact-section {
+  margin-bottom: 2rem;
+}
+
+.contact-content {
+  padding: 1.5rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #3498db;
+}
+
+.contact-email {
+  font-size: 1.2rem;
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.contact-email a {
+  color: #3498db;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-email a:hover {
+  color: #2980b9;
+  text-decoration: underline;
+}
+
+/* Dark mode styles */
+body.dark-mode .contact-content {
+  background-color: #2a2a2a;
+  color: #f0f0f0;
+  border-left-color: #3498db;
+}
+
+body.dark-mode .contact-email a {
+  color: #60a5fa;
+}
+
+body.dark-mode .contact-email a:hover {
+  color: #93c5fd;
+}
+
+@media (max-width: 600px) {
+  .contact-email {
+    font-size: 1.1rem;
+    word-break: break-all;
+  }
+}
