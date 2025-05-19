@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
     } else {
-      const theme = localStorage.getItem("theme") || "dark";
+      const theme = localStorage.getItem("theme") || "light";
       applyTheme(theme);
       if (toggleBtn) {
         toggleBtn.addEventListener("click", () => {
