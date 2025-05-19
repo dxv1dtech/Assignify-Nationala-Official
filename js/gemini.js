@@ -5,6 +5,7 @@ const deleteChatButton = document.querySelector("#delete-chat-button");
 
 let userMessage = null;
 let isResponseGenerating = false;
+let chatHistory = [];
 
 const API_KEY = "AIzaSyBz2qb-bJGAZXyzrYqK99vUkI1ZFwdZf64";
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
@@ -52,24 +53,31 @@ const showTypingEffect = (text, textElement, incomingMessageDiv) => {
   }, 75);
 };
 
-// Get Gemini response
 const generateAPIResponse = async (incomingMessageDiv) => {
   const textElement = incomingMessageDiv.querySelector(".text");
 
   try {
-    const prompt = `
-You are a school tutor. Understand both English and Romanian, but always respond only in Romanian.
-Accept only school-related topics (Math, Romanian, Science, History, Geography).
-If off-topic, say politely: "Sunt aici să te ajut doar cu materii școlare. Te rog pune o întrebare legată de școală."
-Întrebarea utilizatorului: ${userMessage}
-`;
+    // Construim conținutul conversației
+    const contents = [
+      {
+        role: "user",
+        parts: [{
+          text: `Ești un tutor școlar. Înțelegi română și engleză, dar răspunzi doar în română.
+Accepți doar întrebări despre materiile școlare (Matematică, Română, Istorie, Geografie, Științe).
+Dacă întrebarea nu e despre școală, răspunde: "Sunt aici să te ajut doar cu materii școlare. Te rog pune o întrebare legată de școală."`
+        }]
+      },
+      // 🧠 Adăugăm întreg istoricul conversației aici
+      ...chatHistory.map(entry => ({
+        role: entry.role,
+        parts: [{ text: entry.text }]
+      }))
+    ];
 
     const response = await fetch(API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        contents: [{ role: "user", parts: [{ text: prompt }] }],
-      }),
+      body: JSON.stringify({ contents })
     });
 
     const data = await response.json();
@@ -78,6 +86,8 @@ If off-topic, say politely: "Sunt aici să te ajut doar cu materii școlare. Te 
     if (!response.ok || !reply) {
       throw new Error(data?.error?.message || "No valid response received.");
     }
+
+    chatHistory.push({ role: "model", text: reply });
 
     const cleanResponse = reply.replace(/\*\*(.*?)\*\*/g, "$1");
     showTypingEffect(cleanResponse, textElement, incomingMessageDiv);
@@ -122,6 +132,8 @@ const handleOutgoingChat = () => {
   document.body.classList.add("hide-header");
   chatContainer.scrollTo(0, chatContainer.scrollHeight);
   setTimeout(showLoadingAnimation, 500);
+
+  chatHistory.push({ role: "user", text: userMessage });
 };
 
 // Event listeners
@@ -130,6 +142,7 @@ deleteChatButton.addEventListener("click", () => {
     localStorage.removeItem("saved-chats");
     loadDataFromLocalstorage();
   }
+  chatHistory = [];
 });
 
 suggestions.forEach(suggestion => {
