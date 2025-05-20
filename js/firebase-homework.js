@@ -193,7 +193,11 @@ function createHomeworkCard(id, message, date, duedate, type, className) {
   }
 
   if (diffDays < 3) {
-    card.style.backgroundColor = "#FF4545";
+    card.style.backgroundColor = "#cc0000";
+    header.style.color = "white";
+    createdDate.style.color = "white";
+    dueDate.style.color = "white";
+    daysRemaining.style.color = "white";
   }
 
   const removeBtn = document.createElement("button");
