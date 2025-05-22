@@ -4,8 +4,7 @@
     "description": "A simple web app to track homework.",
     "start_url": "/index.html",
     "display": "standalone",
-    "background_color": "#ffffff", 
-    "theme_color": "#3498db", 
+    "theme_color": "#283593", 
     "icons": [
       {
         "src": "images/assignify.png",
