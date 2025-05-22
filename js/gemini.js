@@ -10,7 +10,6 @@ let chatHistory = [];
 const API_KEY = "AIzaSyBz2qb-bJGAZXyzrYqK99vUkI1ZFwdZf64";
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
-// Load theme and chat data
 const loadDataFromLocalstorage = () => {
   const savedChats = localStorage.getItem("saved-chats");
   const isLightMode = (localStorage.getItem("themeColor") === "light_mode");
@@ -20,7 +19,6 @@ const loadDataFromLocalstorage = () => {
   chatContainer.scrollTo(0, chatContainer.scrollHeight);
 };
 
-// Create a new message DOM element
 const createMessageElement = (content, ...classes) => {
   const div = document.createElement("div");
   div.classList.add("message", ...classes);
@@ -37,11 +35,9 @@ const showTypingEffect = (text, textElement, incomingMessageDiv) => {
       clearInterval(typingInterval);
       isResponseGenerating = false;
 
-      // ✅ Remove loading bar
       const loadingIndicator = incomingMessageDiv.querySelector(".loading-indicator");
       if (loadingIndicator) loadingIndicator.remove();
 
-      // ✅ Remove loading class from entire message
       incomingMessageDiv.classList.remove("loading");
 
       localStorage.setItem("saved-chats", chatContainer.innerHTML);
@@ -57,7 +53,6 @@ const generateAPIResponse = async (incomingMessageDiv) => {
   const textElement = incomingMessageDiv.querySelector(".text");
 
   try {
-    // Construim conținutul conversației
     const contents = [
       {
         role: "user",
@@ -67,7 +62,6 @@ Accepți doar întrebări despre materiile școlare (Matematică, Română, Isto
 Dacă întrebarea nu e despre școală, răspunde: "Sunt aici să te ajut doar cu materii școlare. Te rog pune o întrebare legată de școală."`
         }]
       },
-      // 🧠 Adăugăm întreg istoricul conversației aici
       ...chatHistory.map(entry => ({
         role: entry.role,
         parts: [{ text: entry.text }]
@@ -99,7 +93,6 @@ Dacă întrebarea nu e despre școală, răspunde: "Sunt aici să te ajut doar c
   }
 };
 
-// Show loading animation (no avatar or copy button)
 const showLoadingAnimation = () => {
   const html = `<div class="message-content">
     <p class="text"></p>
@@ -115,7 +108,6 @@ const showLoadingAnimation = () => {
   generateAPIResponse(incomingMessageDiv);
 };
 
-// Handle user message
 const handleOutgoingChat = () => {
   userMessage = typingForm.querySelector(".typing-input").value.trim() || userMessage;
   if (!userMessage || isResponseGenerating) return;
@@ -136,7 +128,6 @@ const handleOutgoingChat = () => {
   chatHistory.push({ role: "user", text: userMessage });
 };
 
-// Event listeners
 deleteChatButton.addEventListener("click", () => {
   if (confirm("Are you sure you want to delete all the chats?")) {
     localStorage.removeItem("saved-chats");
